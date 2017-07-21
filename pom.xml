@@ -52,6 +52,7 @@
   
 	<modules>
 		<module>config</module>
-		
+
+		<module>register</module>
 	</modules>
 </project>

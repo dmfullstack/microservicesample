@@ -2,4 +2,11 @@ config:
   image: frankhuang/config
   ports:
    - "8888:8888"
+  links:
+   - register
+   
+register:
+  image: frankhuang/register
+  ports: 
+   - "8761:8761"
   
