@@ -1,0 +1,5 @@
+config:
+  image: frankhuang/config
+  ports:
+   - "8888:8888"
+  
