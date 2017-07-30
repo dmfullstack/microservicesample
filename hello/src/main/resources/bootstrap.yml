@@ -1,0 +1,20 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: hello
+    
+security:
+  oauth2:
+    client:
+      client-id: hello
+      client-secret: 123
+      access-token-uri: http://localhost:8555/oauth/token
+      user-authorization-uri: http://localhost:8555/oauth/authorize
+    resource:
+      user-info-uri: http://localhost:8555/users/current
+      
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://register:8761/eureka/

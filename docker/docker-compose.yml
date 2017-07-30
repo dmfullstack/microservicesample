@@ -9,4 +9,18 @@ register:
   image: frankhuang/register
   ports: 
    - "8761:8761"
-  
+   
+hello:
+  image: frankhuang/hello
+  ports:
+   - "8081:8081"
+  links:
+   - register
+   - auth
+    
+auth:
+  image: frankhuang/auth
+  ports:
+   - "8555:8555"
+  links:
+   - register
