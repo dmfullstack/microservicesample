@@ -1,6 +1,5 @@
 package com.frank.hello;
 
-import java.security.Principal;
 import feign.RequestInterceptor;
 
 import org.springframework.beans.factory.annotation.Autowired;

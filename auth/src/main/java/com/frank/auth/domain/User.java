@@ -1,58 +1,126 @@
 package com.frank.auth.domain;
 
-import java.util.List;
+import org.hibernate.validator.constraints.Email;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.util.Set;
 
-public class User implements UserDetails{
+@Entity
+public class User {
 
+    @Id
+    @Column(updatable = false, nullable = false)
+    @Size(min = 0, max = 50)
+    private String username;
 
-	private String username;
+    @Size(min = 0, max = 500)
+    private String password;
 
-	private String password;
+    @Email
+    @Size(min = 0, max = 50)
+    private String email;
 
-	@Override
-	public String getPassword() {
-		return password;
-	}
+    private boolean activated;
 
-	@Override
-	public String getUsername() {
-		return username;
-	}
+    @Size(min = 0, max = 100)
+    @Column(name = "activationkey")
+    private String activationKey;
 
-	@Override
-	public List<GrantedAuthority> getAuthorities() {
-		return null;
-	}
+    @Size(min = 0, max = 100)
+    @Column(name = "resetpasswordkey")
+    private String resetPasswordKey;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    @ManyToMany
+    @JoinTable(
+            name = "user_authority",
+            joinColumns = @JoinColumn(name = "username"),
+            inverseJoinColumns = @JoinColumn(name = "authority"))
+    private Set<Authority> authorities;
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
+
+    public String getActivationKey() {
+        return activationKey;
+    }
+
+    public void setActivationKey(String activationKey) {
+        this.activationKey = activationKey;
+    }
+
+    public String getResetPasswordKey() {
+        return resetPasswordKey;
+    }
+
+    public void setResetPasswordKey(String resetPasswordKey) {
+        this.resetPasswordKey = resetPasswordKey;
+    }
+
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (!username.equals(user.username)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return username.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", activated='" + activated + '\'' +
+                ", activationKey='" + activationKey + '\'' +
+                ", resetPasswordKey='" + resetPasswordKey + '\'' +
+                ", authorities=" + authorities +
+                '}';
+    }
 }
-

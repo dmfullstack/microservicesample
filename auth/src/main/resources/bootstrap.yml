@@ -2,13 +2,10 @@ server:
   port: 8555
 spring:
   application:
-    name: auth
-
+     name: auth
+     
 eureka:
   client:
     serviceUrl:
       defaultZone: http://register:8761/eureka/
 
-logging:
-  level:
-    org.springframework.security: DEBUG

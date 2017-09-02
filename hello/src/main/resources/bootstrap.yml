@@ -7,10 +7,12 @@ spring:
 security:
   oauth2:
     client:
-      client-id: hello
-      client-secret: 123
+      client-id: client
+      client-secret: fucksecurity
       access-token-uri: http://localhost:8555/oauth/token
       user-authorization-uri: http://localhost:8555/oauth/authorize
+      scope: read,write
+      auto-approve-scopes: '.*'
     resource:
       user-info-uri: http://localhost:8555/users/current
       
